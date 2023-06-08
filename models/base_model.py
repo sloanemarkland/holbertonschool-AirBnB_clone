@@ -14,4 +14,14 @@ class BaseModel():
         self.updated_at = datetime.now()
 
     def save(self):
+        """Saves and updates the date"""
         self.updated_at = datetime.now()
+
+    def to_dict(self):
+        """Dictionary representation of BaseModel"""
+        return {'id': self.id, 'width': self.__width, 'height':
+                self.__height, 'x': self.__x, 'y': self.__y}
+
+    def __str__(self):
+        """String representation function"""
+        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
