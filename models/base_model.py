@@ -4,6 +4,7 @@ File containing Base model class for AirBnB - The Console
 """
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel():
@@ -20,12 +21,15 @@ class BaseModel():
                 if key == 'created_at' or key == 'updated_at':
                     value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
                 setattr(self, key, value)
+        else:
+            storage.new(self)
             
 
 
     def save(self):
         """Saves and updates the date"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Dictionary representation of BaseModel"""
