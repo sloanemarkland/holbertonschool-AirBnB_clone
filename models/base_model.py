@@ -23,8 +23,6 @@ class BaseModel():
                 setattr(self, key, value)
         else:
             storage.new(self)
-            
-
 
     def save(self):
         """Saves and updates the date"""
