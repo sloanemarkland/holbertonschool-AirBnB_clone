@@ -104,28 +104,37 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not args:
             print('** class name missing **')
-        elif args[0] != 'BaseModel':
+            return
+        class_name = args[0]
+        if class_name not in HBNBCommand.class_list:
             print('** class doesn\'t exist **')
-        elif len(args) < 2:
+            return
+        if len(args) < 2:
             print('** instance id missing **')
-        elif len(args) < 3:
+            return
+        instance_id = args[1]
+        key = "{}.{}".format(class_name, instance_id)
+        objects = storage.all().get(key)
+        if not objects:
+            print("** no instance found **")
+            return
+        if len(args) < 3:
             print('** attribute name missing **')
-        elif len(args) < 4:
+            return
+        attribute_name = args[2]
+        if len(args) < 4:
             print('** value missing **')
-        else:
-            objects = BaseModel.load_json()
-            key = args[0] + '.' + args[1]
-            if key not in objects:
-                print('** no instance found **')
-                return
-            instance = objects[key]
-            attribute_name = args[2]
-            attribute_value = args[3]
+            return
+        attribute_value = args[3]
+        setattr(objects, attribute_name, attribute_value)
+        objects.save()
+        
+        # instance = objects[key]
 
-            if attribute_name in instance:
-                attribute_value = type(instance[attribute_name])(attribute_value)
-            instance[attribute_name] = attribute_value
-            storage.save()
+        # if attribute_name in instance:
+        #     attribute_value = type(instance[attribute_name])(attribute_value)
+        # instance[attribute_name] = attribute_value
+        # storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
