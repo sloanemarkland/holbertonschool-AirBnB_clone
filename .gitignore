@@ -53,3 +53,5 @@ dkms.conf
 
 # holbertonschool-low_level_programming
 deploy.sh
+99-tester.py
+file.json
