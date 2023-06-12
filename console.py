@@ -5,6 +5,7 @@ import json
 from models.base_model import BaseModel
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """Command interpreter class"""
 
@@ -19,13 +20,14 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         """EOF command to exit the program"""
         return True
-    
+
     def emptyline(self):
         """Do nothing when empty line is entered"""
         pass
 
     def do_create(self, arg):
-        """Creates a new instance of BaseModel, saves to JSON file and prints id"""
+        """Creates a new instance of BaseModel,
+            saves to JSON file and prints id"""
         if not arg:
             print('** class name missing **')
             return
@@ -128,13 +130,7 @@ class HBNBCommand(cmd.Cmd):
         attribute_value = args[3]
         setattr(objects, attribute_name, attribute_value)
         objects.save()
-        
-        # instance = objects[key]
 
-        # if attribute_name in instance:
-        #     attribute_value = type(instance[attribute_name])(attribute_value)
-        # instance[attribute_name] = attribute_value
-        # storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
