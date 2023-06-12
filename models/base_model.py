@@ -41,4 +41,5 @@ class BaseModel():
 
     def __str__(self):
         """String representation function"""
-        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
+        im_string = self.__class__.__name__
+        return ("[{}] ({}) {}".format(im_string, self.id, self.__dict__))
