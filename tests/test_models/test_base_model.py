@@ -35,6 +35,12 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(fakemod.created_at, fakecreate)
         self.assertNotEqual(fakemod.updated_at, fakeupdate)
 
+    def test_to_dict(self):
+        gizelle = BaseModel()
+        gizelle_dict = gizelle.to_dict()
+        self.assertIsInstance(gizelle_dict, dict)
+        self.assertIsInstance(gizelle_dict["updated_at"], str)
+        self.assertIsInstance(gizelle_dict["created_at"], str)
 
 if __name__ == '__main__':
     unittest.main()
