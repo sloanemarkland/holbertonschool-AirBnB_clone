@@ -13,7 +13,7 @@ class TestFileStorage(unittest.TestCase):
         """ setup for all tests """
         self.model = BaseModel()
         self.storage = FileStorage()
-        self.storage = save()
+        self.file_storage = save()
 
     def tearDown(self):
         """ teardown for all tests """
