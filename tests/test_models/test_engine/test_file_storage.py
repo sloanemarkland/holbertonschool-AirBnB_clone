@@ -37,9 +37,21 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
         """ test file_storage save method """
-        model = BaseModel()
-        model.save()
-        self.assertTrue(os.path.exists('file.json'))
+        self.assertTrue(os.path.exists("file.json"))
+        with open("file.json", mode="r", encoding="utf-8") as file:
+            file_content = file.read()
+        self.assertTrue(len(file_content) > 0)
+        self.assertIn(f"{self.model.__class__.__name__}.{self.model.id}",
+                      file_content)
+
+    def test_reload(self):
+        """ test file_storage reload method """
+        self.storage.destroy_all()
+        self.assertEqual(self.storage.all(), {})
+        self.assertTrue(len(self.storage.all()) == 0)
+        self.storage.reload()
+        self.assertIn(f"{self.model.__class__.__name__}.{self.model.id}",
+                      self.storage.all().keys())
 
 if __name__ == '__main__':
     unittest.main()
