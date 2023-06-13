@@ -36,6 +36,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(fakemod.updated_at, fakeupdate)
 
     def test_to_dict(self):
+        """ test to_dict method of BaseModel class """
         gizelle = BaseModel()
         gizelle_dict = gizelle.to_dict()
         self.assertIsInstance(gizelle_dict, dict)
