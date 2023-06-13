@@ -4,13 +4,12 @@ Class that serializes instances to a JSON file
     and deserializes JSON file to instances
 """
 import json
-import os
 from models.base_model import BaseModel
-# from models.user import Amenity
-# from models.user import City
-# from models.user import Place
-# from models.user import Review
-# from models.user import State
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
 from models.user import User
 
 
