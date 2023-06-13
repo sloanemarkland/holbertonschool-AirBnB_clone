@@ -130,3 +130,7 @@ class HBNBCommand(cmd.Cmd):
         attribute_value = args[3]
         setattr(objects, attribute_name, attribute_value)
         objects.save()
+
+
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
