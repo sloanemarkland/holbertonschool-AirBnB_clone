@@ -50,5 +50,12 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(gizelle_dict["updated_at"], str)
         self.assertIsInstance(gizelle_dict["created_at"], str)
 
+    def test__str__(self):
+        """ test __str__ method of BaseModel class """
+        self.assertEqual(self.model.__str__(), (
+            f"[{self.model.__class__.__name__}] "
+            f"({self.model.id}) {self.model.__dict__}"))
+
+
 if __name__ == '__main__':
     unittest.main()
