@@ -35,5 +35,11 @@ class TestFileStorage(unittest.TestCase):
         self.assertIsInstance(my_dict, dict)
         self.assertIn(model, my_dict.values())
 
+    def test_save(self):
+        """ test file_storage save method """
+        model = BaseModel()
+        model.save()
+        self.assertTrue(os.path.exists('file.json'))
+
 if __name__ == '__main__':
     unittest.main()
