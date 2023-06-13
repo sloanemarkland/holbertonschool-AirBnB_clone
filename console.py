@@ -3,7 +3,14 @@
 import cmd
 import json
 from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 from models import storage
+import models
 
 
 class HBNBCommand(cmd.Cmd):
@@ -12,6 +19,15 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     class_list = ["Review", "Place", "State",
                   "User", "BaseModel", "City", "Amenity"]
+    # class_dict = {
+    #     "Review": Review,
+    #     "Place": Place,
+    #     "State": State,
+    #     "User": User,
+    #     "BaseModel": BaseModel,
+    #     "City": City,
+    #     "Amenity": Amenity
+    # }
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
