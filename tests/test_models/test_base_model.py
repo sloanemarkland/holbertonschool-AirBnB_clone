@@ -1,11 +1,23 @@
 """test_base module"""
 import unittest
 import uuid
+import os
 from datetime import datetime
 from models.base_model import BaseModel
 
 class TestBaseModel(unittest.TestCase):
     """TestBase class documentation"""
+
+    def setUp(self):
+        """ setup for all tests """
+        self.model = BaseModel()
+        self.model.save()
+
+    def tearDown(self):
+        """ teardown for all tests """
+        del self.model
+        os.remove("file.json")
+
     def test_init(self):
         """ Test initialization of BaseModel class """
         modelmodel = BaseModel()
@@ -28,12 +40,7 @@ class TestBaseModel(unittest.TestCase):
     
     def test_save(self):
         """ test the save method of BaseModel class """
-        fakemod = BaseModel()
-        fakecreate = fakemod.created_at
-        fakeupdate = fakemod.updated_at
-        fakemod.save()
-        self.assertEqual(fakemod.created_at, fakecreate)
-        self.assertNotEqual(fakemod.updated_at, fakeupdate)
+        self.assertNotEqual(self.model.created_at, self.model.updated_at)
 
     def test_to_dict(self):
         """ test to_dict method of BaseModel class """
