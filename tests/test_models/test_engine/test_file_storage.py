@@ -13,7 +13,7 @@ class TestFileStorage(unittest.TestCase):
         """ setup for all tests """
         self.model = BaseModel()
         self.storage = FileStorage()
-        self.file_storage = save()
+        self.storage.save()
 
     def tearDown(self):
         """ teardown for all tests """
@@ -25,7 +25,7 @@ class TestFileStorage(unittest.TestCase):
         """ test file_storage new method """
         model = BaseModel()
         self.storage.new(model)
-        my_dict = self.file_storage.all()
+        my_dict = self.storage.all()
         self.assertIn(model, my_dict.values())
     
     def test_all(self):
@@ -34,6 +34,24 @@ class TestFileStorage(unittest.TestCase):
         my_dict = self.storage.all()
         self.assertIsInstance(my_dict, dict)
         self.assertIn(model, my_dict.values())
+
+    def test_save(self):
+        """ test file_storage save method """
+        self.assertTrue(os.path.exists("file.json"))
+        with open("file.json", mode="r", encoding="utf-8") as file:
+            file_content = file.read()
+        self.assertTrue(len(file_content) > 0)
+        self.assertIn(f"{self.model.__class__.__name__}.{self.model.id}",
+                      file_content)
+
+    def test_reload(self):
+        """ test file_storage reload method """
+        self.storage.destroy_all()
+        self.assertEqual(self.storage.all(), {})
+        self.assertTrue(len(self.storage.all()) == 0)
+        self.storage.reload()
+        self.assertIn(f"{self.model.__class__.__name__}.{self.model.id}",
+                      self.storage.all().keys())
 
 if __name__ == '__main__':
     unittest.main()
