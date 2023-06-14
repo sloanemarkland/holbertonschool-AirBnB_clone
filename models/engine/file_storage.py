@@ -13,10 +13,15 @@ from models.state import State
 from models.user import User
 
 
-class FileStorage:
+class FileStorage():
     """serializes instance to JSON file"""
     __file_path = "file.json"
     __objects = {}
+
+    @classmethod
+    def destroy_all(cls):
+        """Destroys all existing instances of BaseModel and it's children"""
+        cls.__objects = {}
 
     def all(self):
         """returns the dictionary __objects"""
